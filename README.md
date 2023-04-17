@@ -1,9 +1,10 @@
 ## QR Codes
-<div align="center">
+<div align="">
   <img src="https://github.com/setoba1192/bank-app-test/blob/master/images/QR-CODE-1.jpeg" width="200"/>
-</div>
-
-<div align="center">
+  &nbsp;
+  &nbsp;
+  &nbsp;
+  &nbsp;
   <img src="https://github.com/setoba1192/bank-app-test/blob/master/images/QR-CODE-2.jpeg" width="200"/>
 </div>
 
