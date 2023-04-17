@@ -1,10 +1,10 @@
 ## QR Codes
 <div align="center">
-  <img src="https://github.com/setoba1192/bank-app-test/blob/master/images/QR-CODE-1.jpeg"/>
+  <img src="https://github.com/setoba1192/bank-app-test/blob/master/images/QR-CODE-1.jpeg" width="200"/>
 </div>
 
 <div align="center">
-  <img src="https://github.com/setoba1192/bank-app-test/blob/master/images/QR-CODE-2.jpeg"/>
+  <img src="https://github.com/setoba1192/bank-app-test/blob/master/images/QR-CODE-2.jpeg" width="200"/>
 </div>
 
 **Ionic(Angular)** Latest Ionic version (6+) with Angular.
