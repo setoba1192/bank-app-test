@@ -1,0 +1,22 @@
+:host {
+  body{
+    background-color: transparent !important;
+    --ion-background-color : transparent !important;
+    --background: transparent !important;
+  }
+  --background : transparent;
+  ion-list {
+    background-color: transparent;
+  }
+  ion-content { --background: transparent;}
+}
+ion-content { --background: transparent;}
+
+body.scanner-active {
+  --background: transparent !important;
+  --ion-background-color: transparent !important;
+  background-color: transparent !important;
+}
+html, body,  ion-app, ion-content, ion-page, .nav-decor {
+  --background: transparent;
+}

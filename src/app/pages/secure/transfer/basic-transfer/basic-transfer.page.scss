@@ -1,0 +1,11 @@
+:host {
+  ion-list {
+    background-color: var(--ion-color-primary);
+  }
+  .form-default {
+    margin-top: 20px;
+    ion-item {
+      --padding-bottom: 5px;
+    }
+  }
+}

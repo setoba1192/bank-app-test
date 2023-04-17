@@ -1,0 +1,19 @@
+<ion-header collapse="fade" [translucent]="true">
+  <ion-toolbar color="dark">
+    <ion-buttons slot="start">
+      <ion-back-button color="secondary" text="Home" defaultHref="/account">
+      </ion-back-button>
+    </ion-buttons>
+
+    <ion-title color="light">
+      Scan QR Code
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [style.--background]="'#00000000'">
+  <ion-button expand="full" (click)="requestCameraPermissions()" *ngIf="!permissionCameraGranted">Request Permissions</ion-button>
+</ion-content>
+<ion-footer>
+  <ion-button expand="full" (click)="cancel()">Cancel</ion-button>
+</ion-footer>

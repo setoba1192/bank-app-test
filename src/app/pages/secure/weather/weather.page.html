@@ -1,0 +1,83 @@
+<ion-header collapse="fade" [translucent]="true">
+  <ion-toolbar color="dark">
+    <ion-title color="light">
+      Weather
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <ion-header collapse="condense">
+    <ion-toolbar>
+      <ion-title size="large">Weather</ion-title>
+    </ion-toolbar>
+    <ion-toolbar>
+      <ion-searchbar showCancelButton="focus" placeholder="Company, category, expense ..."></ion-searchbar>
+    </ion-toolbar>
+  </ion-header>
+
+  <div class="ion-padding">
+    <!-- Skeletons -->
+    <ion-list class="item-card-list animate__animated animate__fadeIn" *ngIf="loading">
+      <ion-item lines="none" color="primary" *ngFor="let i of [].constructor(3);">
+        <ion-avatar slot="start">
+          <ion-skeleton-text animated></ion-skeleton-text>
+        </ion-avatar>
+        <ion-label>
+          <h3><ion-skeleton-text animated style="width: 50%"></ion-skeleton-text></h3>
+          <p><ion-skeleton-text animated style="width: 30%"></ion-skeleton-text></p>
+        </ion-label>
+      </ion-item>
+    </ion-list>
+
+    <ng-container *ngIf="!loading">
+      <ion-list class="item-card-list animate__animated animate__fadeIn" *ngIf="grantedLocation && 
+        !locationServicesFailed && 
+        !errorLoadingWeatherInfo" lines="none">
+        <ion-item color="primary">
+          <ion-label color="medium">
+            <h3>City: {{currentWeather?.city}}</h3>
+            <p>Temperature: {{currentWeather?.temperature}}</p>
+            <p>Feels Like: {{currentWeather?.feelsLike}}</p>
+            <p>Description: {{currentWeather?.description}}</p>
+            <img [src]="currentWeather?.icon">
+          </ion-label>
+        </ion-item>
+      </ion-list>
+      <ion-card color="primary" *ngIf="!grantedLocation">
+        <ion-card-header>
+          <ion-card-title>Geolocation</ion-card-title>
+          <ion-button color="secondary" (click)="openSettingsApp()">
+            <ion-icon name="location-outline"></ion-icon>
+            Request permisions
+          </ion-button>
+        </ion-card-header>
+        <ion-card-content>
+          Location permissions not granted
+        </ion-card-content>
+      </ion-card>
+      <ion-card color="primary" *ngIf="locationServicesFailed">
+        <ion-card-header>
+          <ion-card-title>Geolocation</ion-card-title>
+          <ion-button color="secondary" (click)="openSettingsTurnOnLocation()">
+            <ion-icon name="location-outline"></ion-icon>
+            Turn on location services
+          </ion-button>
+        </ion-card-header>
+      </ion-card>
+      <ion-card color="primary" *ngIf="errorLoadingWeatherInfo">
+        <ion-card-header>
+          <ion-card-title>Geolocation</ion-card-title>
+          <ion-button color="secondary" (click)="retryLoadWeatherInfo()">
+            <ion-icon name="refresh-outline"></ion-icon>
+            Retry
+          </ion-button>
+        </ion-card-header>
+        <ion-card-content>
+          There was an error loading the information, please try again
+        </ion-card-content>
+      </ion-card>
+    </ng-container>
+  </div>
+
+</ion-content>

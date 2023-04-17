@@ -1,0 +1,109 @@
+<ion-header collapse="fade" [translucent]="true">
+  <ion-toolbar color="dark">
+    <ion-buttons slot="start">
+      <ion-back-button color="secondary" text="Home" defaultHref="/account" (click)="cancel()">
+      </ion-back-button>
+    </ion-buttons>
+
+    <ion-title color="light">
+      Transfer
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+
+  <form [formGroup]="transferForm">
+    <div class="ion-padding">
+
+      <ion-list-header class="ion-list-header-small">
+        <ion-label>
+          <ion-text color="primary">Account Type</ion-text>
+        </ion-label>
+      </ion-list-header>
+
+      <ion-list class="list-custom" lines="full">
+        <ion-item color="primary" class="list-custom">
+          <ion-select placeholder="Select an account type" color="secondary" formControlName="accountType">
+            <ion-select-option value="SAVING">Saving</ion-select-option>
+            <ion-select-option value="CHECKING">Checking</ion-select-option>
+          </ion-select>
+        </ion-item>
+      </ion-list>
+
+      <hr class="hr-small">
+
+      <ion-list-header class="ion-list-header-small">
+        <ion-label>
+          <ion-text color="primary">Account</ion-text>
+        </ion-label>
+      </ion-list-header>
+
+      <ion-list class="list-custom" lines="full">
+        <ion-item color="primary" class="list-custom">
+          <ion-select placeholder="Select an account" color="secondary" formControlName="account"
+            [compareWith]="compare">
+            <ng-container *ngIf="transferFormControls?.accountType.value == 'SAVING'">
+              <ng-container *ngFor="let account of userAccount.savingAccounts">
+                <ion-select-option [value]="account">{{account.number}}</ion-select-option>
+              </ng-container>
+            </ng-container>
+            <ng-container *ngIf="transferFormControls?.accountType.value == 'CHECKING'">
+              <ng-container *ngFor="let account of userAccount.checkingAccounts">
+                <ion-select-option [value]="account">{{account.number}}</ion-select-option>
+              </ng-container>
+            </ng-container>
+          </ion-select>
+        </ion-item>
+      </ion-list>
+
+      <hr class="hr-small">
+
+      <ng-container>
+        <ion-list-header class="ion-list-header-small">
+          <ion-label>
+            <ion-text color="primary">Currency</ion-text>
+          </ion-label>
+        </ion-list-header>
+
+
+        <ion-list color="primary">
+          <ion-select placeholder="Select a currency" color="secondary" formControlName="currency" [compareWith]="compare">
+            <ng-container *ngFor="let currency of exchanges">
+              <ion-select-option [value]="currency">{{currency.name}}</ion-select-option>
+            </ng-container>
+          </ion-select>
+        </ion-list>
+      </ng-container>
+      <ion-item color="dark" class="animate__animated animate__fadeInUp ion-margin-top ion-margin-bottom">
+        <ion-label position="floating">
+          Transfer Amount
+        </ion-label>
+        <ion-input type="text" inputmode="numeric" maxLength="11" [clearInput]="true" color="primary"
+          placeholder="Transfer Amount" formControlName="amount" numbersOnly></ion-input>
+      </ion-item>
+      <ion-item color="dark" class="animate__animated animate__fadeInUp">
+        <ion-label position="floating">
+          Receiving Account
+        </ion-label>
+        <ion-input type="text" inputmode="numeric" [clearInput]="true" color="primary" maxlength="11"
+          placeholder="Receiving Account" formControlName="receivingAccount" numbersOnly></ion-input>
+        <ion-note *ngIf="transferForm.get('receivingAccount').errors?.['minlength']" slot="error">Please enter an
+          11-character account number</ion-note>
+      </ion-item>
+
+
+      <ion-grid>
+        <ion-row *ngIf="!qrGeneratorMode">
+          <ion-col><ion-button expand="block" (click)="transfer()" [disabled]="!transferForm.valid">Complete
+              Transfer</ion-button></ion-col>
+        </ion-row>
+        <ion-row *ngIf="qrGeneratorMode">
+          <ion-col><ion-button expand="block" (click)="generateQRCode()" [disabled]="!transferForm.valid">Generate QR
+              Code</ion-button></ion-col>
+        </ion-row>
+      </ion-grid>
+    </div>
+  </form>
+
+</ion-content>
