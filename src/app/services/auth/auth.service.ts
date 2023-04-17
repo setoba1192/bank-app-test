@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { JwtHelperService } from '@auth0/angular-jwt';
 import { Preferences } from '@capacitor/preferences';
-import { delay, tap } from 'rxjs';
+import { delay, tap, map } from 'rxjs';
 import { LoginResponse } from 'src/app/models/login-response.model';
 import { SessionService } from '../session/session.service';
 
@@ -38,12 +38,19 @@ export class AuthService {
       email: email,
       password: password,
     };
-    return this.httpClient.get('./assets/accounts/login.json').pipe(
-      delay(4000),
-      tap((data: LoginResponse) => {
-        console.log('eeee', data);
 
-        this.setSession(data.token);
+    return this.httpClient.get('./assets/accounts/login.json').pipe(
+      delay(2500),
+      map((data: LoginResponse) => {
+        if (
+          requestLogin.email == 'test@softcaribbean.com' &&
+          requestLogin.password == '1234'
+        ) {
+          this.setSession(data.token);
+          return data;
+        }
+
+        throw Error('Email or password not valid');
       })
     );
   }

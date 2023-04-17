@@ -17,13 +17,12 @@ export class SessionService {
       key: LAST_DATE_KEY,
     });
     if (!lastDayValue) {
-      return false;
+      throw Error('Not session available');
     }
     const lastDay: Date = new Date(JSON.parse(lastDayValue).date);
 
     const milliseconds = new Date().getTime() - lastDay.getTime();
     const sessionMinutes = Math.floor(milliseconds / 60000);
-    console.log('minutes', sessionMinutes);
 
     return sessionMinutes <= Number(duration);
   }

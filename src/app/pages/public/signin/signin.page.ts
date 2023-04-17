@@ -75,12 +75,15 @@ export class SigninPage implements OnInit {
             this.router.navigate(['/account']);
           }
         },
-        error: () => {
+        error: (error) => {
+          console.log(error);
+          
+          loading.dismiss();
           this.toastService.presentToast(
             'Error',
-            'An error occurred while sigin, please try again later',
+            error?.error ? 'An error occurred while sigin, please try again later' : error.message,
             'center',
-            'red',
+            'danger',
             4000
           );
         },
