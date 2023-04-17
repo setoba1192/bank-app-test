@@ -65,10 +65,6 @@ export class BasicTransferPage implements OnInit {
     if (data?.account) {
       this.readonly = true;
       this.transferForm.patchValue(data);
-      this.transferForm.disable();
-      if (!data.amount) {
-        this.transferForm.controls.amount.enable();
-      }
     }
   }
 
@@ -166,7 +162,7 @@ export class BasicTransferPage implements OnInit {
       next: (data: TransferResponse) => {
         this.presentAlert(
           'Transaction',
-          'Transaction : ' + data.transaccionNumber,
+          'Transaction ID: ' + data.transaccionNumber,
           data.message
         ).then(() => {
           this.router.navigate(['/account']);
@@ -257,12 +253,12 @@ export class BasicTransferPage implements OnInit {
   }
 
   cancel() {
-    this.resetAll()
-    console.log("pasa algo?");
-    
+    this.resetAll();
+    console.log('pasa algo?');
+
     this.router.navigate(['/account']);
   }
-  resetAll(){
+  resetAll() {
     this.readonly = false;
     this.transferForm.reset();
   }
