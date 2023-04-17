@@ -1,3 +1,12 @@
+## QR Codes
+<div align="center">
+  <img src="https://github.com/setoba1192/bank-app-test/blob/master/images/QR-CODE-1.jpeg"/>
+</div>
+
+<div align="center">
+  <img src="https://github.com/setoba1192/bank-app-test/blob/master/images/QR-CODE-2.jpeg"/>
+</div>
+
 **Ionic(Angular)** Latest Ionic version (6+) with Angular.
 
 ## Built with
